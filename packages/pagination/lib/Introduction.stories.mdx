@@ -5,11 +5,11 @@ import Pagination from './Pagination.vue'
 
 <DocsStyle />
 
-<Meta title="Example/Introduction" component={Pagination} />
+<Meta title="UI组件/Pagination（分页）" component={Pagination} />
 
-## Pagination Docs
+# Pagination（分页）
 
-Some MDX docs for the `Pagination` component.
+**`u-pagination`** 组件 基于 [`v-pagination`](https://vuetifyjs.com/zh-Hans/api/v-pagination/) 封装，扩展了当前页面数量的选取功能
 
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
@@ -23,7 +23,19 @@ export const Template = (args, { argTypes }) => ({
 })
 
 <Preview>
-  <Story name="basic" args={{ total: 2000, totalVisible: 7 }}>
+  <Story height="240px" name="基本使用" args={{ total: 2000, totalVisible: 7 }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+阿斯顿发送到发送
+
+<Preview>
+  <Story
+    height="240px"
+    name="基本使用2"
+    args={{ total: 2000, totalVisible: 7, color: 'red' }}
+  >
     {Template.bind({})}
   </Story>
 </Preview>

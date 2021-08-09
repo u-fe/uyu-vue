@@ -6,7 +6,7 @@
   "author": "fezzc <zhouzuchuan@sina.com>",
   "homepage": "https://github.com/u-fe/uyu-vue/tree/main/packages/pagination#readme",
   "license": "ISC",
-  "main": "lib/pagination.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -22,9 +22,13 @@
     "url": "git+https://github.com/u-fe/uyu-vue.git"
   },
   "scripts": {
+    "build": "builder",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/u-fe/uyu-vue/issues"
+  },
+  "devDependencies": {
+    "@uyu-vue/builder": "^0.0.0"
   }
 }

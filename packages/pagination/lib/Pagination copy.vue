@@ -1,17 +1,17 @@
 <template>
-  <div class="u-pagination">
-    <div class="u-pagination_total_text">共{{ total }}条</div>
+  <div class="u_pagination">
+    <div class="u_pagination_total_text">共{{ total }}条</div>
 
-    <v-pagination
+    <!-- <v-pagination
       v-model="pageNo"
       :length="pageCount"
-      v-bind="$attrs"
-      :total="total"
+      :total-visible="totalVisible"
+      v-bind="{ ...$attrs, ...$props }"
       v-on="$listeners"
     />
 
     <v-select
-      class="u-pagination_sizes_select"
+      class="u_pagination_sizes_select"
       v-model="pageSize"
       dense
       :items="sizeOptions"
@@ -20,14 +20,14 @@
       outlined
       hide-details
       @change="handleChangeSizeSelect"
-    />
+    /> -->
   </div>
 </template>
 
 <script>
-// import { VPagination } from 'vuetify/lib'
+// import { VPagination } from 'vuetify'
 
-// console.log(VPagination.options.props.color)
+// console.log(VPagination.options.props)
 
 export default {
   name: 'UPagination',
@@ -49,27 +49,22 @@ export default {
     // wrapperAriaLabel: {
     //   type: VPagination.options.props.wrapperAriaLabel.type,
     // },
-    /** 当前页码 */
+    /** 发送验证码接口函数 */
     value: {
       type: Number,
       default: 1,
     },
-    /** 页面展示的数量 支持 .sync 修饰符 **/
     size: {
       type: Number,
       default: 20,
     },
-
-    /** 每页显示数量 选择器的选项设置 **/
     sizes: {
       type: Array,
       default: () => [10, 20, 30, 50, 100],
     },
-
-    /** 总条目数 **/
     total: {
       type: Number,
-      default: 10,
+      default: 0,
     },
   },
 
@@ -95,24 +90,24 @@ export default {
     },
     pageNo(v) {
       /**
-       * 被绑定模型的更新（页码）
+       * Passthrough click event
        * @type {Event}
        */
       this.$emit('input', v)
       /**
-       * 修改当前页码 触发
+       * Passthrough click event asdfasdf asdafsdf
        * @type {Event}
        */
       this.$emit('page-change', v)
     },
     pageSize(v) {
       /**
-       * 更新绑定的页面数量
+       * Passthrough click event asdfasdf asdafsdf
        * @type {Event}
        */
       this.$emit('update:size', v)
       /**
-       * 需改页面数量 触发
+       * Passthrough click event asdfasdf asdafsdf
        * @type {Event}
        */
       this.$emit('size-change', v)
@@ -140,8 +135,8 @@ export default {
 }
 </script>
 
- <style lang="scss"  >
-.u-pagination {
+<style lang="scss"  >
+.u_pagination {
   display: flex;
   align-items: center;
   font-size: 14px;

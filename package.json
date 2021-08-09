@@ -1,6 +1,10 @@
 {
   "name": "uyu-vue",
-  "version": "1.0.0",
+  "version": "0.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
   "description": "遵循Material-desigin设计规范，基于Vuetify二次开发的Vue UI组件库",
   "main": "index.js",
   "scripts": {

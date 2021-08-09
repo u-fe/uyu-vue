@@ -35,5 +35,8 @@
   },
   "peerDependencies": {
     "vuetify": "2.x"
+  },
+  "dependencies": {
+    "@uyu-vue/pagination": "^0.0.0"
   }
 }

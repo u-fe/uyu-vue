@@ -14,7 +14,7 @@ export const storyFactory = (options) => {
         defaultValue: 'en',
         control: {
           type: 'inline-radio',
-          options: { English: 'en', Español: 'es' },
+          options: { English: 'en', 中文: 'zh' },
         },
       },
     },
