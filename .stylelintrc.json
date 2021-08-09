@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order",
+    "stylelint-config-prettier"
+  ],
+  "plugins": ["stylelint-order", "stylelint-scss"],
+  "rules": {
+    "indentation": 2,
+    "at-rule-no-unknown": [
+      true,
+      { "ignoreAtRules": ["mixin", "extend", "content", "include"] }
+    ],
+    "scss/at-rule-no-unknown": true,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["v-deep"]
+      }
+    ],
+    "font-family-no-missing-generic-family-keyword": [
+      true,
+      {
+        "ignoreFontFamilies": ["Arial", "Open Sans"]
+      }
+    ]
+  }
+}
