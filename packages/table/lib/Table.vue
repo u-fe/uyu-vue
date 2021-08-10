@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import debounce from 'lodash.debounce'
+import throttle from 'lodash.throttle'
 import UPagination from '@uyu-vue/pagination'
 
 export default {
@@ -335,9 +336,9 @@ export default {
 
         const containerTableEl = containerEl.querySelector('table')
 
-        const listenersScroll = _.debounce(this.handleScroll, 100)
+        const listenersScroll = debounce(this.handleScroll, 100)
 
-        const listenersHeight = _.throttle(() => {
+        const listenersHeight = throttle(() => {
           let height = parseFloat(
             window.getComputedStyle(containerTableEl).getPropertyValue('height')
           )

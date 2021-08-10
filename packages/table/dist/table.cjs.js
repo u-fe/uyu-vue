@@ -1,12 +1,14 @@
 'use strict';
 
-var _ = require('lodash');
+var debounce = require('lodash.debounce');
+var throttle = require('lodash.throttle');
 var UPagination = require('@uyu-vue/pagination');
 var vue = require('vue');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-var ___default = /*#__PURE__*/_interopDefaultLegacy(_);
+var debounce__default = /*#__PURE__*/_interopDefaultLegacy(debounce);
+var throttle__default = /*#__PURE__*/_interopDefaultLegacy(throttle);
 var UPagination__default = /*#__PURE__*/_interopDefaultLegacy(UPagination);
 
 var script = {
@@ -25,7 +27,7 @@ var script = {
     },
 
     /**
-     * 分页参数
+     * 分页参数 参考 @uyu-vue/pagination 文档
      * */
     paginationProps: {
       type: Object,
@@ -35,7 +37,8 @@ var script = {
     },
 
     /**
-     * 请求函数
+     * 远程请求函数， promise函数
+     * 返回的数据必须是 `{ rows: [], total: 10 }`
      * */
     serveRequest: {
       type: Function,
@@ -44,6 +47,7 @@ var script = {
 
     /**
      * 请求参数
+     * 当 参数变动 则分页复位第一页以及重新 触发远程请求
      * */
     requestParams: {
       type: Object,
@@ -53,7 +57,7 @@ var script = {
     },
 
     /**
-     * 分页数量
+     * 分页数量 （当前页面显示的数量）
      * */
     pageSize: {
       type: Number,
@@ -77,9 +81,6 @@ var script = {
       type: Array,
       default() {
         return []
-        // return Array(30)
-        //   .fill(1)
-        //   .map((v, i) => ({ v: i }))
       },
     },
 
@@ -145,6 +146,31 @@ var script = {
     tableMaxNumber() {
       return this.isScroll ? 999999999 : this.currentPageSize
     },
+
+    slots() {
+      const defaultNoDataSlotNames = [
+        'footer.prepend',
+        'loading',
+        'no-data',
+        'no-results',
+        'progress',
+      ];
+      return Object.values(
+        Object.keys(this.$scopedSlots).reduce(
+          (r, v) => {
+            const idx = defaultNoDataSlotNames.includes(v) ? 0 : 1;
+            return {
+              ...r,
+              [idx]: [...r[idx], v],
+            }
+          },
+          {
+            0: [],
+            1: [],
+          }
+        )
+      )
+    },
   },
 
   watch: {
@@ -162,6 +188,7 @@ var script = {
       // if (v.pageNum === 1) {
       //   this.dataSource = []
       // }
+
       this.emitPagination();
       this.handleRequest();
     },
@@ -255,8 +282,11 @@ var script = {
     },
 
     emitPagination() {
+      /**
+       * 分页变动触发
+       * @type {Event}
+       */
       this.$emit('onPagination', this.pagination);
-      this.$emit('update:paginationParams', this.pagination);
     },
 
     resetPaginationRequest() {
@@ -282,9 +312,9 @@ var script = {
 
         const containerTableEl = containerEl.querySelector('table');
 
-        const listenersScroll = ___default['default'].debounce(this.handleScroll, 100);
+        const listenersScroll = debounce__default['default'](this.handleScroll, 100);
 
-        const listenersHeight = ___default['default'].throttle(() => {
+        const listenersHeight = throttle__default['default'](() => {
           let height = parseFloat(
             window.getComputedStyle(containerTableEl).getPropertyValue('height')
           );
@@ -328,13 +358,11 @@ const _hoisted_2 = {
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_u_nodata = vue.resolveComponent("u-nodata");
   const _component_v_data_table = vue.resolveComponent("v-data-table");
   const _component_u_pagination = vue.resolveComponent("u-pagination");
 
   return (vue.openBlock(), vue.createBlock("div", _hoisted_1, [
     vue.createVNode(_component_v_data_table, vue.mergeProps({
-      ref: "vTable",
       "hide-default-footer": "",
       "fixed-header": ""
     }, _ctx.$attrs, {
@@ -343,16 +371,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "items-per-page": $options.tableMaxNumber,
       height: $options.tableHeight
     }, vue.toHandlers(_ctx.$listeners)), vue.createSlots({
-      "no-data": vue.withCtx(() => [
-        vue.createVNode(_component_u_nodata)
+      default: vue.withCtx(() => [
+        (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList($options.slots[0], (name) => {
+          return vue.renderSlot(_ctx.$slots, name, { slot: name })
+        }), 256 /* UNKEYED_FRAGMENT */))
       ]),
       _: 2 /* DYNAMIC */
     }, [
-      vue.renderList(Object.keys(_ctx.$scopedSlots), (name) => {
+      vue.renderList($options.slots[1], (name) => {
         return {
           name: name,
-          fn: vue.withCtx((a) => [
-            vue.renderSlot(_ctx.$slots, name, a)
+          fn: vue.withCtx((bindData) => [
+            vue.renderSlot(_ctx.$slots, name, bindData)
           ])
         }
       })

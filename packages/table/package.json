@@ -37,6 +37,8 @@
     "vuetify": "2.x"
   },
   "dependencies": {
-    "@uyu-vue/pagination": "^0.0.0"
+    "@uyu-vue/pagination": "^0.0.0",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1"
   }
 }
