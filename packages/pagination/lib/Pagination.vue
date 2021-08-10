@@ -1,6 +1,6 @@
 <template>
-  <div class="u-pagination">
-    <div class="u-pagination_total_text">共{{ total }}条</div>
+  <div class="d-flex align-center justify-center">
+    <div>共{{ total }}条</div>
 
     <v-pagination
       v-model="pageNo"
@@ -10,18 +10,20 @@
       v-on="$listeners"
     />
 
-    <v-select
-      class="u-pagination_sizes_select"
-      v-model="pageSize"
-      dense
-      :items="sizeOptions"
-      item-text="label"
-      item-value="value"
-      outlined
-      hide-details
-      attach
-      @change="handleChangeSizeSelect"
-    />
+    <div>
+      <v-select
+        style="max-width: 100px"
+        v-model="pageSize"
+        dense
+        :items="sizeOptions"
+        item-text="label"
+        item-value="value"
+        outlined
+        hide-details
+        attach
+        @change="handleChangeSizeSelect"
+      />
+    </div>
   </div>
 </template>
 
@@ -132,18 +134,5 @@ export default {
 }
 </script>
 
- <style lang="scss"  >
-.u-pagination {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
 
-  &_total_text {
-    color: #666;
-  }
 
-  &_sizes_select {
-    max-width: 100px;
-  }
-}
-</style>

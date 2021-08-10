@@ -5,6 +5,8 @@ const resolve = require('@rollup/plugin-node-resolve').default
 const babel = require('@rollup/plugin-babel').default
 const commonjs = require('@rollup/plugin-commonjs')
 const vuePlugins = require('rollup-plugin-vue')
+const postcss = require('rollup-plugin-postcss')
+const css = require('rollup-plugin-css-only')
 
 const currentWorkingPath = process.cwd()
 const { main, name } = require(path.join(currentWorkingPath, 'package.json'))
@@ -19,7 +21,12 @@ const inputOptions = {
   plugins: [
     // resolve(),
     // commonjs(),
-    vuePlugins(),
+    postcss({
+      modules: true,
+    }),
+    css(),
+    vuePlugins({ css: false }),
+
     babel({
       presets: ['@babel/preset-env'],
       babelHelpers: 'bundled',

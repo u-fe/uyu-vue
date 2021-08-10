@@ -212,22 +212,3 @@ export const headers = [
     }}
   </Story>
 </Preview>
-
-#### 无数据
-
-<Preview>
-  <Story name="无数据">
-    {{
-      components: { UTable },
-      template: `
-        <u-table :loading="true" :data="[]" :headers="headers">
-        </u-table>
-      `,
-      data() {
-        return {
-          headers,
-        }
-      },
-    }}
-  </Story>
-</Preview>
