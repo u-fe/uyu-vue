@@ -19,36 +19,17 @@
       item-value="value"
       outlined
       hide-details
+      attach
       @change="handleChangeSizeSelect"
     />
   </div>
 </template>
 
 <script>
-// import { VPagination } from 'vuetify/lib'
-
-// console.log(VPagination.options.props.color)
-
 export default {
   name: 'UPagination',
 
   props: {
-    // color: VPagination.options.props.color,
-    // circle: VPagination.options.props.circle,
-    // currentPageAriaLabel: VPagination.options.props.currentPageAriaLabel,
-    // dark: VPagination.options.props.dark,
-    // disabled: VPagination.options.props.disabled,
-    // light: VPagination.options.props.light,
-    // nextAriaLabel: VPagination.options.props.nextAriaLabel,
-    // nextIcon: VPagination.options.props.nextIcon,
-    // pageAriaLabel: VPagination.options.props.pageAriaLabel,
-    // prevIcon: VPagination.options.props.prevIcon,
-    // previousAriaLabel: VPagination.options.props.previousAriaLabel,
-    // totalVisible: VPagination.options.props.totalVisible,
-    /** 发送验证码接口函数 */
-    // wrapperAriaLabel: {
-    //   type: VPagination.options.props.wrapperAriaLabel.type,
-    // },
     /** 当前页码 */
     value: {
       type: Number,
@@ -116,6 +97,17 @@ export default {
        * @type {Event}
        */
       this.$emit('size-change', v)
+
+      /**
+       * 被绑定模型的更新（页码）
+       * @type {Event}
+       */
+      this.$emit('input', 1)
+      /**
+       * 修改当前页码 触发
+       * @type {Event}
+       */
+      this.$emit('page-change', 1)
     },
   },
 

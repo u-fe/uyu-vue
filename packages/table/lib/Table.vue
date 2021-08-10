@@ -1,7 +1,6 @@
 <template>
   <div ref="table">
     <v-data-table
-      ref="vTable"
       hide-default-footer
       fixed-header
       v-bind="$attrs"
@@ -11,7 +10,8 @@
       :height="tableHeight"
       v-on="$listeners"
     >
-      <template v-for="name of Object.keys($scopedSlots)" #[name]="bindData">
+      <slot v-for="name of slots[0]" :name="name" :slot="name"></slot>
+      <template v-for="name of slots[1]" #[name]="bindData">
         <slot :name="name" v-bind="bindData" />
       </template>
     </v-data-table>
@@ -169,6 +169,31 @@ export default {
     tableMaxNumber() {
       return this.isScroll ? 999999999 : this.currentPageSize
     },
+
+    slots() {
+      const defaultNoDataSlotNames = [
+        'footer.prepend',
+        'loading',
+        'no-data',
+        'no-results',
+        'progress',
+      ]
+      return Object.values(
+        Object.keys(this.$scopedSlots).reduce(
+          (r, v) => {
+            const idx = defaultNoDataSlotNames.includes(v) ? 0 : 1
+            return {
+              ...r,
+              [idx]: [...r[idx], v],
+            }
+          },
+          {
+            0: [],
+            1: [],
+          }
+        )
+      )
+    },
   },
 
   watch: {
@@ -186,6 +211,7 @@ export default {
       // if (v.pageNum === 1) {
       //   this.dataSource = []
       // }
+
       this.emitPagination()
       this.handleRequest()
     },
@@ -279,8 +305,11 @@ export default {
     },
 
     emitPagination() {
+      /**
+       * 分页变动触发
+       * @type {Event}
+       */
       this.$emit('onPagination', this.pagination)
-      this.$emit('update:paginationParams', this.pagination)
     },
 
     resetPaginationRequest() {

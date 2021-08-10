@@ -50,11 +50,23 @@ export const decorators = [
         },
       },
       template: `
-        <v-app>
-          <v-container fluid>
-            <wrapped />
-          </v-container>
+        <v-app id="${Math.random()}"> 
+            <wrapped /> 
         </v-app>
+      `,
+    })
+  },
+
+  (story, context) => {
+    // wrap the passed component within the passed context
+    const wrapped = story(context)
+    // extend Vue to use Vuetify around the wrapped component
+
+    return Vue.extend({
+      components: { wrapped },
+
+      template: ` 
+            <wrapped />  
       `,
     })
   },
