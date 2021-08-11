@@ -13,7 +13,7 @@
     <div>
       <v-select
         v-model="pageSize"
-        style="max-width: 110px"
+        style="max-width: 100px"
         dense
         :items="sizeOptions"
         item-text="label"

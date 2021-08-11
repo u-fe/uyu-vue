@@ -155,8 +155,9 @@ var script = {
         'no-results',
         'progress',
       ];
+
       return Object.values(
-        Object.keys(this.$scopedSlots).reduce(
+        Object.keys(this.$scopedSlots || {}).reduce(
           (r, v) => {
             const idx = defaultNoDataSlotNames.includes(v) ? 0 : 1;
             return {

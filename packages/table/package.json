@@ -7,7 +7,7 @@
   "homepage": "https://github.com/u-fe/uyu-vue/tree/main/packages/table#readme",
   "license": "ISC",
   "main": "dist/table.cjs.js",
-  "module": "dist/table.esm.js",
+  "module": "lib/index.js",
   "src": "lib/index.js",
   "directories": {
     "lib": "lib",

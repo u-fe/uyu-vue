@@ -15,17 +15,19 @@
         <slot :name="name" v-bind="bindData" />
       </template>
     </v-data-table>
+
     <div
       v-if="!isScroll && showPagination && !!total"
       class="flex-box middle mt-4"
     >
-      <u-pagination
+      <u-pagination />
+      <!-- <u-pagination
         v-model="currentPage"
         :total="total"
         :total-visible="7"
         :size.sync="currentPageSize"
         v-bind="paginationProps"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -179,8 +181,9 @@ export default {
         'no-results',
         'progress',
       ]
+
       return Object.values(
-        Object.keys(this.$scopedSlots).reduce(
+        Object.keys(this.$scopedSlots || {}).reduce(
           (r, v) => {
             const idx = defaultNoDataSlotNames.includes(v) ? 0 : 1
             return {

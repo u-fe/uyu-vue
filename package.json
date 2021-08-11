@@ -11,7 +11,8 @@
     "build": "lerna run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "@storybook/addon-essentials": "^6.3.4",
     "@storybook/addon-links": "^6.3.4",
     "@storybook/addons": "^6.3.4",
+    "@storybook/storybook-deployer": "^2.8.10",
     "@storybook/theming": "^6.3.4",
     "@storybook/vue": "^6.3.4",
     "@vue/cli-plugin-eslint": "^4.5.13",
@@ -69,6 +71,11 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "storybook-deployer": {
+    "gitUsername": "fezzc",
+    "gitEmail": "zhouzuchuan@sina.com",
+    "commitMessage": "Deploy Storybook [skip ci]"
   },
   "lint-staged": {
     "packages/**/*.{js,vue}": [

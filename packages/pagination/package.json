@@ -7,7 +7,7 @@
   "homepage": "https://github.com/u-fe/uyu-vue/tree/main/packages/pagination#readme",
   "license": "ISC",
   "main": "dist/pagination.cjs.js",
-  "module": "dist/pagination.esm.js",
+  "module": "lib/index.js",
   "src": "lib/index.js",
   "directories": {
     "lib": "lib",
@@ -32,7 +32,9 @@
     "url": "https://github.com/u-fe/uyu-vue/issues"
   },
   "devDependencies": {
-    "@uyu-vue/builder": "^0.0.2"
+    "@uyu-vue/builder": "^0.0.2",
+    "vue": "^2.6.14",
+    "vuetify": "^2.5.8"
   },
   "gitHead": "ebc9bccca4fdc9697b6086d567174820af7ca0e2"
 }
