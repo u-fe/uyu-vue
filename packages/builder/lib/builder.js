@@ -9,9 +9,9 @@ const postcss = require('rollup-plugin-postcss')
 const css = require('rollup-plugin-css-only')
 
 const currentWorkingPath = process.cwd()
-const { main, name } = require(path.join(currentWorkingPath, 'package.json'))
+const { src, name } = require(path.join(currentWorkingPath, 'package.json'))
 
-const inputPath = path.join(currentWorkingPath, main)
+const inputPath = path.join(currentWorkingPath, src)
 
 const fileName = name.replace('@uyu-vue/', '')
 
