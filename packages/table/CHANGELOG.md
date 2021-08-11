@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/table@0.0.3...@uyu-vue/table@0.0.4) (2021-08-11)
+
+
+### Features
+
+* **cli:** eslint ([4d50247](https://github.com/u-fe/uyu-vue/commit/4d502475fc9f98ef36f2c8856f8e8c94b058d2e7))
+* **global:** dev ([4660c9a](https://github.com/u-fe/uyu-vue/commit/4660c9ac4c4c44a74f56d227b2602f5f4d328c3a))
+
+
+
+
+
 ## [0.0.3](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/table@0.0.2...@uyu-vue/table@0.0.3) (2021-08-11)
 
 
