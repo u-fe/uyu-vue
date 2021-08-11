@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/table@0.0.1...@uyu-vue/table@0.0.2) (2021-08-11)
+
+
+### Features
+
+* **global:** dev ([e749929](https://github.com/u-fe/uyu-vue/commit/e7499295c4c30d15cc37fcff8ef4dab763f0ddb6))
+
+
+
+
+
 ## 0.0.1 (2021-08-10)
 
 
