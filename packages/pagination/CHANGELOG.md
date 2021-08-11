@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.3](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/pagination@0.0.2...@uyu-vue/pagination@0.0.3) (2021-08-11)
+
+
+### Features
+
+* **global:** dev ([fce090e](https://github.com/u-fe/uyu-vue/commit/fce090e9252402c94d79163d42bde4fbdea14112))
+
+
+
+
+
 ## [0.0.2](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/pagination@0.0.1...@uyu-vue/pagination@0.0.2) (2021-08-11)
 
 
