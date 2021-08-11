@@ -43,5 +43,6 @@
     "@uyu-vue/pagination": "^0.0.2",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1"
-  }
+  },
+  "gitHead": "ebc9bccca4fdc9697b6086d567174820af7ca0e2"
 }
