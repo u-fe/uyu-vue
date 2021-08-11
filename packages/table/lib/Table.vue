@@ -10,7 +10,7 @@
       :height="tableHeight"
       v-on="$listeners"
     >
-      <slot v-for="name of slots[0]" :name="name" :slot="name"></slot>
+      <slot v-for="name of slots[0]" :slot="name" :name="name"></slot>
       <template v-for="name of slots[1]" #[name]="bindData">
         <slot :name="name" v-bind="bindData" />
       </template>

@@ -12,8 +12,8 @@
 
     <div>
       <v-select
-        style="max-width: 110px"
         v-model="pageSize"
+        style="max-width: 110px"
         dense
         :items="sizeOptions"
         item-text="label"
@@ -61,6 +61,19 @@ export default {
       pageNo: this.value,
       pageSize: this.size,
     }
+  },
+
+  computed: {
+    pageCount() {
+      return Math.ceil(this.total / this.pageSize) || 1
+    },
+
+    sizeOptions() {
+      return this.sizes.map((v) => ({
+        label: `${v}`,
+        value: v,
+      }))
+    },
   },
 
   watch: {
@@ -113,19 +126,6 @@ export default {
     },
   },
 
-  computed: {
-    pageCount() {
-      return Math.ceil(this.total / this.pageSize) || 1
-    },
-
-    sizeOptions() {
-      return this.sizes.map((v) => ({
-        label: `${v}`,
-        value: v,
-      }))
-    },
-  },
-
   methods: {
     handleChangeSizeSelect(value) {
       this.pageSize = value
@@ -133,6 +133,3 @@ export default {
   },
 }
 </script>
-
-
-
