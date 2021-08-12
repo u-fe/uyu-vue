@@ -10,7 +10,19 @@
       v-on="$listeners"
     />
 
-    <div>
+    <v-select
+      v-model="pageSize"
+      style="max-width: 100px"
+      dense
+      :items="sizeOptions"
+      item-text="label"
+      item-value="value"
+      outlined
+      hide-details
+      @change="handleChangeSizeSelect"
+    />
+
+    <!-- <div>
       <v-select
         v-model="pageSize"
         style="max-width: 100px"
@@ -23,7 +35,7 @@
         attach
         @change="handleChangeSizeSelect"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 

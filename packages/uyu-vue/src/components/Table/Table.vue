@@ -34,7 +34,7 @@
 <script>
 import debounce from 'lodash.debounce'
 import throttle from 'lodash.throttle'
-import UPagination from '@uyu-vue/pagination'
+import UPagination from '../Pagination'
 
 export default {
   name: 'UTable',

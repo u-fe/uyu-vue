@@ -2,8 +2,8 @@ const path = require('path')
 
 module.exports = {
   stories: [
-    '../packages/**/*.stories.mdx',
     '../stories/**/*.stories.@(js|mdx)',
+    '../packages/**/*.stories.mdx',
   ],
   addons: [
     '@storybook/addon-links',
@@ -12,9 +12,12 @@ module.exports = {
   ],
   // add this function to tweak the webpack config
   webpackFinal: async (config, { configType }) => {
-    config.resolve.alias['~storybook'] = path.resolve(__dirname)
-
-    config.resolve.alias['@'] = path.resolve(__dirname, '..')
+    config.resolve.alias = {
+      ...(config.resolve?.alias || {}),
+      '~storybook': path.resolve(__dirname),
+      '@': path.resolve(__dirname, '..'),
+      '@uyu-vue/core': path.resolve(__dirname, '../packages/core'),
+    }
 
     config.module.rules.push({
       test: /\.s(c|a)ss$/,

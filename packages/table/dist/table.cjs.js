@@ -1,29 +1,141 @@
 'use strict';
 
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 var debounce = require('lodash.debounce');
+
 var throttle = require('lodash.throttle');
+
 var UPagination = require('@uyu-vue/pagination');
+
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+function _interopDefaultLegacy$1(e) {
+  return e && _typeof(e) === 'object' && 'default' in e ? e : {
+    'default': e
+  };
+}
 
-var debounce__default = /*#__PURE__*/_interopDefaultLegacy(debounce);
-var throttle__default = /*#__PURE__*/_interopDefaultLegacy(throttle);
-var UPagination__default = /*#__PURE__*/_interopDefaultLegacy(UPagination);
+var debounce__default = /*#__PURE__*/_interopDefaultLegacy$1(debounce);
+
+var throttle__default = /*#__PURE__*/_interopDefaultLegacy$1(throttle);
+
+var UPagination__default = /*#__PURE__*/_interopDefaultLegacy$1(UPagination);
 
 var script = {
   name: 'UTable',
   components: {
-    UPagination: UPagination__default['default'],
+    UPagination: UPagination__default['default']
   },
-
   props: {
     /**
      * 是否显示分页
      * */
     showPagination: {
       type: Boolean,
-      default: true,
+      "default": true
     },
 
     /**
@@ -31,9 +143,9 @@ var script = {
      * */
     paginationProps: {
       type: Object,
-      default() {
-        return {}
-      },
+      "default": function _default() {
+        return {};
+      }
     },
 
     /**
@@ -42,7 +154,7 @@ var script = {
      * */
     serveRequest: {
       type: Function,
-      default: undefined,
+      "default": undefined
     },
 
     /**
@@ -51,9 +163,9 @@ var script = {
      * */
     requestParams: {
       type: Object,
-      default() {
-        return {}
-      },
+      "default": function _default() {
+        return {};
+      }
     },
 
     /**
@@ -61,7 +173,7 @@ var script = {
      * */
     pageSize: {
       type: Number,
-      default: 10,
+      "default": 10
     },
 
     /**
@@ -71,7 +183,7 @@ var script = {
      * */
     mode: {
       type: String,
-      default: 'table',
+      "default": 'table'
     },
 
     /**
@@ -79,9 +191,9 @@ var script = {
      * */
     data: {
       type: Array,
-      default() {
-        return []
-      },
+      "default": function _default() {
+        return [];
+      }
     },
 
     /**
@@ -89,7 +201,7 @@ var script = {
      * */
     height: {
       type: [Number, String],
-      default: undefined,
+      "default": undefined
     },
 
     /**
@@ -97,200 +209,162 @@ var script = {
      * */
     lowerThreshold: {
       type: Number,
-      default: 80,
-    },
+      "default": 80
+    }
   },
-
-  data() {
+  data: function data() {
     return {
       currentPage: 1,
       total: 0,
       dataSource: [],
       currentPageSize: this.showPagination ? this.pageSize : 999999999,
       loading: false,
-
       // 内容高度
       contentHeight: 0,
       // 滚动加载 高度是否计算结束
       heightCalcEnd: true,
-
       // 滚动容器
-      scrollWrapperEl: null,
-    }
+      scrollWrapperEl: null
+    };
   },
-
   computed: {
-    pagination() {
+    pagination: function pagination() {
       return {
         pageNum: this.currentPage,
-        pageSize: this.currentPageSize,
-      }
+        pageSize: this.currentPageSize
+      };
     },
-
     // 是否是远程
-    isRemote() {
-      return typeof this.serveRequest === 'function'
+    isRemote: function isRemote() {
+      return typeof this.serveRequest === 'function';
     },
-
     // 是否滚动加载
-    isScroll() {
-      return this.mode === 'scroll'
+    isScroll: function isScroll() {
+      return this.mode === 'scroll';
     },
-
     // 表格高度
-    tableHeight() {
-      return this.isScroll ? this.height ?? 300 : this.height
-    },
+    tableHeight: function tableHeight() {
+      var _this$height;
 
+      return this.isScroll ? (_this$height = this.height) !== null && _this$height !== void 0 ? _this$height : 300 : this.height;
+    },
     // 表格最大显示数量 如果是滚动则不限制
-    tableMaxNumber() {
-      return this.isScroll ? 999999999 : this.currentPageSize
+    tableMaxNumber: function tableMaxNumber() {
+      return this.isScroll ? 999999999 : this.currentPageSize;
     },
-
-    slots() {
-      const defaultNoDataSlotNames = [
-        'footer.prepend',
-        'loading',
-        'no-data',
-        'no-results',
-        'progress',
-      ];
-
-      return Object.values(
-        Object.keys(this.$scopedSlots || {}).reduce(
-          (r, v) => {
-            const idx = defaultNoDataSlotNames.includes(v) ? 0 : 1;
-            return {
-              ...r,
-              [idx]: [...r[idx], v],
-            }
-          },
-          {
-            0: [],
-            1: [],
-          }
-        )
-      )
-    },
+    slots: function slots() {
+      var defaultNoDataSlotNames = ['footer.prepend', 'loading', 'no-data', 'no-results', 'progress'];
+      return Object.values(Object.keys(this.$scopedSlots || {}).reduce(function (r, v) {
+        var idx = defaultNoDataSlotNames.includes(v) ? 0 : 1;
+        return _objectSpread2(_objectSpread2({}, r), {}, _defineProperty({}, idx, [].concat(_toConsumableArray(r[idx]), [v])));
+      }, {
+        0: [],
+        1: []
+      }));
+    }
   },
-
   watch: {
     requestParams: {
       immediate: true,
       deep: true,
-      handler() {
+      handler: function handler() {
         if (this.isRemote) {
           // 远程则复位
           this.resetPaginationRequest();
         }
-      },
+      }
     },
-    pagination(v) {
+    pagination: function pagination(v) {
       // if (v.pageNum === 1) {
       //   this.dataSource = []
       // }
-
       this.emitPagination();
       this.handleRequest();
     },
-
     data: {
       immediate: true,
-      handler(nv) {
+      handler: function handler(nv) {
         if (!this.isRemote) {
           // 不是远程则复位
           this.resetPaginationRequest();
         }
-      },
-    },
+      }
+    }
   },
-
-  created() {
+  created: function created() {
     this.initScrollContainer();
   },
-
-  mounted() {
+  mounted: function mounted() {
     this.emitPagination();
   },
-
   methods: {
-    handleScroll(e) {
-      if (
-        this.isScroll &&
-        this.heightCalcEnd &&
-        this.contentHeight - e.target.scrollTop - this.tableHeight <
-          this.lowerThreshold &&
-        this.dataSource.length < this.total
-      ) {
+    handleScroll: function handleScroll(e) {
+      if (this.isScroll && this.heightCalcEnd && this.contentHeight - e.target.scrollTop - this.tableHeight < this.lowerThreshold && this.dataSource.length < this.total) {
         this.heightCalcEnd = false;
         this.currentPage++;
       }
     },
-
-    handleRequest() {
+    handleRequest: function handleRequest() {
       if (!this.isRemote) {
         this.handleLocalRequest();
       } else {
         this.handleRemoteRequeset();
       }
     },
-
     // 本地分页模拟请求（前端分页）
-    handleLocalRequest() {
-      const { pageNum, pageSize } = this.pagination;
+    handleLocalRequest: function handleLocalRequest() {
+      var _this$data, _this$data$slice, _this$data$length, _this$data2;
 
-      this.dataSource = this.data?.slice?.(
-        this.isScroll ? 0 : (pageNum - 1) * pageSize,
-        pageNum * pageSize
-      );
-      this.total = this.data?.length ?? 0;
+      var _this$pagination = this.pagination,
+          pageNum = _this$pagination.pageNum,
+          pageSize = _this$pagination.pageSize;
+      this.dataSource = (_this$data = this.data) === null || _this$data === void 0 ? void 0 : (_this$data$slice = _this$data.slice) === null || _this$data$slice === void 0 ? void 0 : _this$data$slice.call(_this$data, this.isScroll ? 0 : (pageNum - 1) * pageSize, pageNum * pageSize);
+      this.total = (_this$data$length = (_this$data2 = this.data) === null || _this$data2 === void 0 ? void 0 : _this$data2.length) !== null && _this$data$length !== void 0 ? _this$data$length : 0;
     },
-
     // 远程接口请求
-    handleRemoteRequeset() {
+    handleRemoteRequeset: function handleRemoteRequeset() {
+      var _this$serveRequest,
+          _this = this;
+
       this.loading = true;
+      var requestFn = (_this$serveRequest = this.serveRequest) === null || _this$serveRequest === void 0 ? void 0 : _this$serveRequest.call(this, _objectSpread2(_objectSpread2({}, this.pagination), this.requestParams || {}));
 
-      const requestFn = this.serveRequest?.({
-        ...this.pagination,
-        ...(this.requestParams || {}),
-      });
+      if (typeof (requestFn === null || requestFn === void 0 ? void 0 : requestFn.then) === 'function') {
+        requestFn.then(function (data) {
+          if (_this.isScroll) {
+            if (_this.pagination.pageNum === 1) {
+              var _data$rows;
 
-      if (typeof requestFn?.then === 'function') {
-        requestFn
-          .then((data) => {
-            if (this.isScroll) {
-              if (this.pagination.pageNum === 1) {
-                this.scrollWrapperEl.scrollTop = 0;
-                this.dataSource = data.rows ?? [];
-              } else {
-                this.dataSource = [...this.dataSource, ...(data.rows ?? [])];
-              }
+              _this.scrollWrapperEl.scrollTop = 0;
+              _this.dataSource = (_data$rows = data.rows) !== null && _data$rows !== void 0 ? _data$rows : [];
             } else {
-              this.dataSource = data.rows;
+              var _data$rows2;
+
+              _this.dataSource = [].concat(_toConsumableArray(_this.dataSource), _toConsumableArray((_data$rows2 = data.rows) !== null && _data$rows2 !== void 0 ? _data$rows2 : []));
             }
-            this.total = data.total;
-          })
-          .catch(() => {
-            this.dataSource = [];
-            this.total = 0;
-          })
-          .finally(() => {
-            this.loading = false;
-          });
+          } else {
+            _this.dataSource = data.rows;
+          }
+
+          _this.total = data.total;
+        })["catch"](function () {
+          _this.dataSource = [];
+          _this.total = 0;
+        })["finally"](function () {
+          _this.loading = false;
+        });
       } else {
         this.loading = false;
       }
     },
-
-    emitPagination() {
+    emitPagination: function emitPagination() {
       /**
        * 分页变动触发
        * @type {Event}
        */
       this.$emit('onPagination', this.pagination);
     },
-
-    resetPaginationRequest() {
+    resetPaginationRequest: function resetPaginationRequest() {
       if (this.currentPage === 1) {
         // this.dataSource = []
         // this.total = 0
@@ -299,107 +373,107 @@ var script = {
         this.currentPage = 1;
       }
     },
-
     // 初始化滚动容器
-    initScrollContainer() {
-      this.$nextTick(() => {
-        if (!this.isScroll || this.scrollWrapperEl) return
-        // 只有滚动才执行下面操作
-        const containerEl = this.$refs.table.querySelector(
-          '.v-data-table__wrapper'
-        );
+    initScrollContainer: function initScrollContainer() {
+      var _this2 = this;
 
-        if (!containerEl) return
+      this.$nextTick(function () {
+        if (!_this2.isScroll || _this2.scrollWrapperEl) return; // 只有滚动才执行下面操作
 
-        const containerTableEl = containerEl.querySelector('table');
+        var containerEl = _this2.$refs.table.querySelector('.v-data-table__wrapper');
 
-        const listenersScroll = debounce__default['default'](this.handleScroll, 100);
+        if (!containerEl) return;
+        var containerTableEl = containerEl.querySelector('table');
+        var listenersScroll = debounce__default['default'](_this2.handleScroll, 100);
+        var listenersHeight = throttle__default['default'](function () {
+          var height = parseFloat(window.getComputedStyle(containerTableEl).getPropertyValue('height'));
 
-        const listenersHeight = throttle__default['default'](() => {
-          let height = parseFloat(
-            window.getComputedStyle(containerTableEl).getPropertyValue('height')
-          );
-          if (height !== this.contentHeight) {
-            this.contentHeight = height;
-            this.heightCalcEnd = true;
+          if (height !== _this2.contentHeight) {
+            _this2.contentHeight = height;
+            _this2.heightCalcEnd = true;
           }
         }, 500);
-
         containerTableEl.addEventListener('animationend', listenersHeight);
         containerTableEl.addEventListener('transitionend', listenersHeight);
         containerEl.addEventListener('scroll', listenersScroll);
-
-        let observer = new MutationObserver(listenersHeight);
+        var observer = new MutationObserver(listenersHeight);
         observer.observe(containerTableEl, {
           childList: true,
           subtree: true,
           characterData: true,
-          attributes: true,
+          attributes: true
         });
+        _this2.scrollWrapperEl = containerEl;
 
-        this.scrollWrapperEl = containerEl;
-
-        this.$once('beforeDestroyed', () => {
+        _this2.$once('beforeDestroyed', function () {
           if (observer) {
             observer.disconnect();
           }
+
           containerTableEl.removeEventListener('animationend', listenersHeight);
           containerTableEl.removeEventListener('transitionend', listenersHeight);
           containerEl.removeEventListener('scroll', listenersScroll);
         });
       });
-    },
-  },
+    }
+  }
 };
-
-const _hoisted_1 = { ref: "table" };
-const _hoisted_2 = {
+var _hoisted_1 = {
+  ref: "table"
+};
+var _hoisted_2 = {
   key: 0,
-  class: "flex-box middle mt-4"
+  "class": "flex-box middle mt-4"
 };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_v_data_table = vue.resolveComponent("v-data-table");
-  const _component_u_pagination = vue.resolveComponent("u-pagination");
+  var _component_v_data_table = vue.resolveComponent("v-data-table");
 
-  return (vue.openBlock(), vue.createBlock("div", _hoisted_1, [
-    vue.createVNode(_component_v_data_table, vue.mergeProps({
-      "hide-default-footer": "",
-      "fixed-header": ""
-    }, _ctx.$attrs, {
-      loading: $data.loading,
-      items: $data.dataSource,
-      "items-per-page": $options.tableMaxNumber,
-      height: $options.tableHeight
-    }, vue.toHandlers(_ctx.$listeners)), vue.createSlots({
-      default: vue.withCtx(() => [
-        (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList($options.slots[0], (name) => {
-          return vue.renderSlot(_ctx.$slots, name, { slot: name })
-        }), 256 /* UNKEYED_FRAGMENT */))
-      ]),
-      _: 2 /* DYNAMIC */
-    }, [
-      vue.renderList($options.slots[1], (name) => {
-        return {
-          name: name,
-          fn: vue.withCtx((bindData) => [
-            vue.renderSlot(_ctx.$slots, name, bindData)
-          ])
-        }
+  var _component_u_pagination = vue.resolveComponent("u-pagination");
+
+  return vue.openBlock(), vue.createBlock("div", _hoisted_1, [vue.createVNode(_component_v_data_table, vue.mergeProps({
+    "hide-default-footer": "",
+    "fixed-header": ""
+  }, _ctx.$attrs, {
+    loading: $data.loading,
+    items: $data.dataSource,
+    "items-per-page": $options.tableMaxNumber,
+    height: $options.tableHeight
+  }, vue.toHandlers(_ctx.$listeners)), vue.createSlots({
+    "default": vue.withCtx(function () {
+      return [(vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList($options.slots[0], function (name) {
+        return vue.renderSlot(_ctx.$slots, name, {
+          slot: name
+        });
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      ))];
+    }),
+    _: 2
+    /* DYNAMIC */
+
+  }, [vue.renderList($options.slots[1], function (name) {
+    return {
+      name: name,
+      fn: vue.withCtx(function (bindData) {
+        return [vue.renderSlot(_ctx.$slots, name, bindData)];
       })
-    ]), 1040 /* FULL_PROPS, DYNAMIC_SLOTS */, ["loading", "items", "items-per-page", "height"]),
-    (!$options.isScroll && $props.showPagination && !!$data.total)
-      ? (vue.openBlock(), vue.createBlock("div", _hoisted_2, [
-          vue.createVNode(_component_u_pagination, vue.mergeProps({
-            modelValue: $data.currentPage,
-            "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => ($data.currentPage = $event)),
-            total: $data.total,
-            "total-visible": 7,
-            size: $data.currentPageSize
-          }, $props.paginationProps), null, 16 /* FULL_PROPS */, ["modelValue", "total", "size"])
-        ]))
-      : vue.createCommentVNode("v-if", true)
-  ], 512 /* NEED_PATCH */))
+    };
+  })]), 1040
+  /* FULL_PROPS, DYNAMIC_SLOTS */
+  , ["loading", "items", "items-per-page", "height"]), !$options.isScroll && $props.showPagination && !!$data.total ? (vue.openBlock(), vue.createBlock("div", _hoisted_2, [vue.createVNode(_component_u_pagination, vue.mergeProps({
+    modelValue: $data.currentPage,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.currentPage = $event;
+    }),
+    total: $data.total,
+    "total-visible": 7,
+    size: $data.currentPageSize
+  }, $props.paginationProps), null, 16
+  /* FULL_PROPS */
+  , ["modelValue", "total", "size"])])) : vue.createCommentVNode("v-if", true)], 512
+  /* NEED_PATCH */
+  );
 }
 
 script.render = render;

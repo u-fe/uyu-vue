@@ -1,4 +1,4 @@
-import Pagination from './Pagination.vue'
+import Pagination from './Pagination'
 
 Pagination.install = function (Vue) {
   Vue.component(Pagination.name, Pagination)
