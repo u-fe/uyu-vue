@@ -34,7 +34,7 @@
 <script>
 import debounce from 'lodash.debounce'
 import throttle from 'lodash.throttle'
-import UPagination from '../Pagination'
+import UPagination from './Pagination'
 
 export default {
   name: 'UTable',
@@ -52,7 +52,7 @@ export default {
     },
 
     /**
-     * 分页参数 参考 @uyu-vue/pagination 文档
+     * 分页参数 参考 [Vuetify Pagination](https://vuetifyjs.com/components/paginations) 文档
      * */
     paginationProps: {
       type: Object,
@@ -63,7 +63,7 @@ export default {
 
     /**
      * 远程请求函数， promise函数
-     * 返回的数据必须是 `{ rows: [], total: 10 }`
+     * 返回的数据必须是 **`{ rows: [], total: 10 }`**
      * */
     serveRequest: {
       type: Function,

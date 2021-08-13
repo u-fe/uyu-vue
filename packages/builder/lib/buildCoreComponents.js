@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 const shell = require('shelljs')
+const compiler = require('vue-template-compiler')
 
 module.exports = async function buildCore() {
   shell.rm('-rf', 'es5', 'lib', 'src-temp')

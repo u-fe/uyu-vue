@@ -46,13 +46,7 @@ module.exports = async function buildCore() {
   function createRollupConfig(file, name) {
     const config = {
       input: file,
-      external: [
-        'vue',
-        'vuetify',
-        'lodash.debounce',
-        'lodash.throttle',
-        '@uyu-vue/core/lib/packages/Pagination',
-      ],
+      external: ['vue', 'vuetify', 'lodash.debounce', 'lodash.throttle'],
 
       plugins: [
         resolve({

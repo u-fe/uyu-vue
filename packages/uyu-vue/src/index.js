@@ -1,7 +1,6 @@
-import Pagination from './components/Pagination'
 import Table from './components/Table'
 
-const components = [Pagination, Table]
+const components = [Table]
 
 const install = function (Vue, opts = {}) {
   components.forEach((component) => {
@@ -15,6 +14,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  Pagination,
   Table,
 }

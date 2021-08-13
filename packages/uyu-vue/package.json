@@ -14,10 +14,14 @@
   "main": "lib/index.js",
   "directories": {
     "lib": "lib",
+    "src": "src",
+    "es5": "es5",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "lib",
+    "src",
+    "es5"
   ],
   "publishConfig": {
     "access": "public"
@@ -35,7 +39,6 @@
   },
   "devDependencies": {
     "@uyu-vue/builder": "^0.0.2",
-    "shelljs": "^0.8.4",
     "vue": "^2.6.14",
     "vuetify": "^2.5.8"
   },
