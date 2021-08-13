@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/utils/index.js"],"names":["a","data","ddd","dd"],"mappings":";;;;;;;AAAO,IAAMA,CAAC,GAAG,SAAJA,CAAI,CAACC,IAAD,EAAU;AAAA;;AACzB,yBAAOA,IAAP,aAAOA,IAAP,oCAAOA,IAAI,CAAEC,GAAb,8CAAO,UAAWC,EAAlB,uDAAwB,CAAxB;AACD,CAFM","sourcesContent":["export const a = (data) => {\n  return data?.ddd?.dd ?? 0\n}\n"],"file":"index.js"}
