@@ -5,11 +5,9 @@ const fs = require('fs-extra')
 const shell = require('shelljs')
 const resolve = require('@rollup/plugin-node-resolve').default
 const babel = require('@rollup/plugin-babel').default
-const commonjs = require('@rollup/plugin-commonjs')
 const vuePlugins = require('rollup-plugin-vue')
 const postcss = require('rollup-plugin-postcss')
 const css = require('rollup-plugin-css-only')
-const buildCore = require('./buildCoreComponents')
 
 const currentWorkingPath = process.cwd()
 const { main, name } = require(path.join(currentWorkingPath, 'package.json'))
@@ -35,101 +33,73 @@ function createRollupConfig(file, name) {
       resolve({
         extensions: ['.js', '.vue', '.json'],
       }),
-      postcss({
-        modules: true,
+      vuePlugins({
+        css: true,
+        compileTemplate: true,
       }),
-      css(),
-      vuePlugins({ css: false }),
-
-      babel({
-        presets: ['@babel/preset-env'],
-        babelHelpers: 'bundled',
-      }),
-      // commonjs(),
     ],
   }
   return config
 }
 
 const defaultOutputConfig = [
-  { dir: 'lib', format: 'esm' },
-  // { dir: 'es5', format: 'cjs' },
+  { tempDir: 'temp_core', dir: 'lib', format: 'cjs' },
 ]
 
+async function runQueue(data) {
+  for (let fn of data) {
+    await fn?.()
+  }
+}
+
 if (fileName === 'core') {
-  // shell.exec(
-  //   `yarn run cross-env NODE_ENV=es5 babel src  --out-dir es5  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
-  // )
   shell.exec(
-    `yarn run cross-env NODE_ENV=lib babel src  --out-dir lib  --source-maps --ignore "src/components/**/*"`
+    `yarn run cross-env NODE_ENV=lib babel src  --out-dir lib  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
   )
 
   const dir = path.join(currentWorkingPath, './src/components')
 
   if (isDir(dir)) {
     const files = fs.readdirSync(dir)
-    files.forEach((componentName) => {
-      const absolutePath = path.join(dir, componentName)
-      if (isDir(absolutePath)) {
-        rollup
-          .rollup(createRollupConfig(path.join(absolutePath, 'index.js')))
-          .then((bundle) =>
-            Promise.all(
-              defaultOutputConfig.map((item) =>
-                bundle.write({
-                  file: `${item.dir}/components/${componentName}/index.js`,
-                  format: item.format,
-                  name: componentName,
-                })
-              )
-            )
-          )
-      }
+
+    runQueue(
+      files.reduce((result, componentName) => {
+        const absolutePath = path.join(dir, componentName)
+        if (isDir(absolutePath)) {
+          return [
+            ...result,
+            async () => {
+              return rollup
+                .rollup(createRollupConfig(path.join(absolutePath, 'index.js')))
+                .then((bundle) =>
+                  Promise.all(
+                    defaultOutputConfig.map((item) =>
+                      bundle.write({
+                        file: `${item.tempDir}/components/${componentName}/index.js`,
+                        format: item.format,
+                        name: componentName,
+                        globals: {
+                          vue: 'Vue',
+                        },
+                      })
+                    )
+                  )
+                )
+            },
+          ]
+        }
+
+        return result
+      }, [])
+    ).then(() => {
+      shell.exec(
+        `yarn run cross-env NODE_ENV=lib babel temp_core  --out-dir lib  --source-maps --ignore "src/components/**/*" --presets=@babel/preset-env`
+      )
+
+      shell.rm('-rf', 'temp_core')
     })
   }
 
-  // buildCore()
-  // inputOptions = {
-  //   input: inputPath,
-  //   // external: ['vue', 'vuetify', './packages/*'],
-  //   external: [
-  //     'vue',
-  //     'vuetify',
-  //     'lodash.debounce',
-  //     'lodash.throttle',
-  //     {
-  //       '@uyu-vue/core/lib/packages/Pagination':
-  //         '@uyu-vue/core/dist/Pagination',
-  //     },
-  //   ],
-  //   plugins: [
-  //     resolve({
-  //       extensions: ['.js', '.vue', '.json'],
-  //       // alias: {
-  //       //   '@uyu-vue/core': path.resolve(__dirname, '..'),
-  //       // },
-  //     }),
-  //     postcss({
-  //       modules: true,
-  //     }),
-  //     css(),
-  //     vuePlugins({ css: false }),
-  //     babel({
-  //       presets: ['@babel/preset-env'],
-  //       babelHelpers: 'bundled',
-  //     }),
-  //   ],
-  // }
-  // outputOptions = [
-  //   {
-  //     file: `dist/${fileName}.cjs.js`,
-  //     format: 'cjs',
-  //   },
-  //   {
-  //     file: `dist/${fileName}.esm.js`,
-  //     format: 'es',
-  //   },
-  // ]
   return
 } else {
   inputOptions = {
