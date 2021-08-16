@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.3](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/builder@0.0.2...@uyu-vue/builder@0.0.3) (2021-08-16)
+
+
+### Features
+
+* **global:** build ([5ba1e78](https://github.com/u-fe/uyu-vue/commit/5ba1e7816753f1c3534b8497fea23c5d0168bf4e))
+* **global:** dev ([8f63b63](https://github.com/u-fe/uyu-vue/commit/8f63b631adb4f39080b4e485e0b31c0f3995240e))
+* **global:** uyu-vue ([6be71d7](https://github.com/u-fe/uyu-vue/commit/6be71d70f6b5a56402f191424273ec8d2b710705))
+
+
+
+
+
 ## [0.0.2](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/builder@0.0.1...@uyu-vue/builder@0.0.2) (2021-08-11)
 
 

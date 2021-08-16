@@ -1,6 +1,6 @@
 {
   "name": "@uyu-vue/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "鱿鱼集 Vue UI库 ",
   "keywords": [
     "uyuji",
@@ -38,7 +38,7 @@
     "url": "https://github.com/u-fe/uyu-vue/issues"
   },
   "devDependencies": {
-    "@uyu-vue/builder": "^0.0.2",
+    "@uyu-vue/builder": "^0.0.3",
     "vue": "^2.6.14",
     "vuetify": "^2.5.8"
   },
