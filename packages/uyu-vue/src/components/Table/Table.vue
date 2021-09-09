@@ -1,6 +1,7 @@
 <template>
-  <div ref="table">
+  <div ref="tableWrapper">
     <v-data-table
+      :ref="tableRef"
       hide-default-footer
       fixed-header
       v-bind="$attrs"
@@ -49,6 +50,14 @@ export default {
     showPagination: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * 指定 v-data-table 的 ref
+     * */
+    tableRef: {
+      type: String,
+      default: '',
     },
 
     /**
@@ -330,7 +339,7 @@ export default {
       this.$nextTick(() => {
         if (!this.isScroll || this.scrollWrapperEl) return
         // 只有滚动才执行下面操作
-        const containerEl = this.$refs.table.querySelector(
+        const containerEl = this.$refs.tableWrapper.querySelector(
           '.v-data-table__wrapper'
         )
 
