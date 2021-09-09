@@ -355,6 +355,14 @@ var script = {
     },
 
     /**
+     * 指定 v-data-table 的 ref
+     * */
+    tableRef: {
+      type: String,
+      "default": ''
+    },
+
+    /**
      * 分页参数 参考 [Vuetify Pagination](https://vuetifyjs.com/components/paginations) 文档
      * */
     paginationProps: {
@@ -596,7 +604,7 @@ var script = {
       this.$nextTick(function () {
         if (!_this2.isScroll || _this2.scrollWrapperEl) return; // 只有滚动才执行下面操作
 
-        var containerEl = _this2.$refs.table.querySelector('.v-data-table__wrapper');
+        var containerEl = _this2.$refs.tableWrapper.querySelector('.v-data-table__wrapper');
 
         if (!containerEl) return;
         var containerTableEl = containerEl.querySelector('table');
@@ -647,8 +655,9 @@ var __vue_render__ = function __vue_render__() {
   var _c = _vm._self._c || _h;
 
   return _c("div", {
-    ref: "table"
+    ref: "tableWrapper"
   }, [_c("v-data-table", _vm._g(_vm._b({
+    ref: _vm.tableRef,
     attrs: {
       "hide-default-footer": "",
       "fixed-header": "",
