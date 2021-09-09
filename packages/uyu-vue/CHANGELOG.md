@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.2](https://github.com/u-fe/uyu-vue/compare/@uyu-vue/core@0.0.1...@uyu-vue/core@0.0.2) (2021-09-09)
+
+
+### Features
+
+* **global): feat(global:** 添加 v-data-table 表格 ref 指定 ([8981c34](https://github.com/u-fe/uyu-vue/commit/8981c343bae8c04553ba58e6a0e20b199d339fe5))
+* **global:** 添加 v-data-table 表格 ref 指定 ([ca41fab](https://github.com/u-fe/uyu-vue/commit/ca41fabb2addcfb66c20f2449e4eca3dcf86abeb))
+
+
+
+
+
 ## 0.0.1 (2021-08-16)
 
 
